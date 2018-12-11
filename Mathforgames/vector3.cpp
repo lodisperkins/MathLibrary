@@ -42,22 +42,22 @@ bool Vector3::operator!=(Vector3 & rhs)
 float Vector3::magnitude()
 {
 	//pow(x,y) and sqrt(x)
-	return sqrt(pow(xpos, 2) + pow(ypos, 2)+pow);
+	return sqrt(pow(xpos, 2) + pow(ypos, 2)+pow(zpos,2));
 }
 
-Vector2 Vector2::operator*(float &scalar)
+Vector3 Vector3::operator*(float &scalar)
 {
-	return Vector2(xpos*scalar, ypos *scalar);
+	return Vector3(xpos*scalar, ypos *scalar,zpos*scalar);
 }
 
-Vector2 Vector2::normalize()
+Vector3 Vector3::normalize()
 {
-	return Vector2(xpos / magnitude(), ypos / magnitude());
+	return Vector3(xpos / magnitude(), ypos / magnitude(),zpos/magnitude());
 }
 
-float Vector2::distance(Vector2& rhs)
+float Vector3::distance(Vector3& rhs)
 {
-	Vector2 newvec(xpos - rhs.getX(), ypos - rhs.getY());
+	Vector3 newvec(xpos - rhs.getX(), ypos - rhs.getY(),zpos- rhs.getZ());
 	return newvec.magnitude();
 }
 
