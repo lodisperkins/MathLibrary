@@ -4,6 +4,13 @@ Vector3::Vector3()
 {
 }
 
+Vector3::Vector3(float newX, float newY, float newZ)
+{
+	xpos = newX;
+	ypos = newY;
+	zpos = newZ;
+}
+
 float Vector3::getX()
 {
 	return xpos;
@@ -53,6 +60,16 @@ Vector3 Vector3::operator*(float &scalar)
 Vector3 Vector3::normalize()
 {
 	return Vector3(xpos / magnitude(), ypos / magnitude(),zpos/magnitude());
+}
+
+float Vector3::dotproduct(Vector3 & rhs)
+{
+	return (xpos*rhs.getX())+(ypos*rhs.getY())+(zpos*rhs.getZ());
+}
+
+Vector3 Vector3::crossProduct(Vector3 & rhs)
+{
+	return Vector3((ypos*rhs.getZ())-(zpos*rhs.getY()),(zpos*rhs.getX())-(xpos*rhs.getZ()),(xpos*rhs.getY())-(ypos*rhs.getX()));
 }
 
 float Vector3::distance(Vector3& rhs)
