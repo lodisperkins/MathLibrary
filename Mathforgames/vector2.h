@@ -17,5 +17,6 @@ public:
 	float magnitude();
 	Vector2 operator* (float&);
 	Vector2 normalize();
+	float dotproduct(Vector2&rhs);
 	float distance(Vector2& rhs);
 };

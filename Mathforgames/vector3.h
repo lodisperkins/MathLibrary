@@ -19,5 +19,7 @@ public:
 	float magnitude();
 	Vector3 operator* (float&);
 	Vector3 normalize();
+	float dotproduct(Vector3&rhs);
+	Vector3 crossProduct(Vector3&rhs);
 	float distance(Vector3& rhs);
 };

@@ -6,6 +6,8 @@ Vector2::Vector2()
 
 Vector2::Vector2(float newX, float newY)
 {
+	xpos = newX;
+	ypos = newY;
 }
 
 float Vector2::getX()
@@ -52,6 +54,11 @@ Vector2 Vector2::operator*(float &scalar)
 Vector2 Vector2::normalize()
 {
 	return Vector2(xpos/magnitude(),ypos/magnitude());
+}
+
+float Vector2::dotproduct(Vector2 & rhs)
+{
+	return (xpos*rhs.getX()) + (ypos*rhs.getY());
 }
 
 float Vector2::distance(Vector2& rhs)
