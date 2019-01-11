@@ -3,12 +3,11 @@
 class Matrix3
 {
 private:
-	
-public:
 	float grid[3][3];
+public:
 	Matrix3();
-	Matrix3(float grid[3][3]);
+	Matrix3(float a, float b, float c, float d, float e, float f, float g, float h, float i);
 	void rotate(float);
 	Matrix3 operator * (Matrix3);
-	Matrix3 operator * (Vector3);
+	Vector3 operator * (Vector3);
 };

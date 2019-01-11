@@ -6,8 +6,9 @@ Matrix3::Matrix3()
 	memcpy(grid, newgrid,sizeof(newgrid));
 }
 
-Matrix3::Matrix3(float newgrid[3][3])
+Matrix3::Matrix3(float a,float b,float c, float d, float e,float f, float g,float h, float i)
 {
+	float newgrid[3][3] = { {a,b,c},{d,e,f},{g,h,i} };
 	memcpy(grid, newgrid, sizeof(newgrid));
 }
 
@@ -23,7 +24,8 @@ Matrix3 Matrix3::operator*(Matrix3 other)
 {
 	int h = 0;
 	float newgrid[3][3];
-	float newValue;
+	float newValue=0;
+	Matrix3 answer;
 	for (int i=0; i <= 2; i++)
 	{
 		for (int j=0; j <= 2; j++)
@@ -32,8 +34,27 @@ Matrix3 Matrix3::operator*(Matrix3 other)
 			{
 				newValue = newValue +(grid[i][h] * other.grid[h][j]);
 			}
-			newgrid[i][j] = newValue;
+			answer.grid[i][j] = newValue;
+			newValue = 0;
 		}
 	}
-	return Matrix3(newgrid);
+	return answer;
+}
+
+Vector3 Matrix3::operator*(Vector3 vec)
+{
+	float newValue = 0;
+	float vecValues[3] = { vec.getX(),vec.getY(),vec.getZ() };
+	float answerVal[3];
+	for (int j = 0; j <= 2; j++)
+	{
+		for (int h = 0; h <= 2; h++)
+		{
+			newValue = newValue + (grid[j][h] * vecValues[h]);
+		}
+		answerVal[j] = newValue;
+		newValue = 0;
+	}
+	
+	return Vector3(answerVal[0], answerVal[1], answerVal[2]);
 }
