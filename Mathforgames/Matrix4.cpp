@@ -1,8 +1,6 @@
 #include "Matrix4.h"
+#include <cmath>
 #include <cstring>
-Matrix4::Matrix4()
-{
-}
 
 Matrix4::Matrix4()
 {
@@ -24,30 +22,30 @@ void Matrix4::rotateX(float value)
 }
 void Matrix4::rotateY(float value)
 {
-	grid[0][0] = grid[0][0] - value;
-	grid[1][0] = grid[1][0] + value;
+	grid[0][0] = cos(value);
+	grid[2][0] = sin(value);
 	grid[0][1] = grid[0][1] - value;
 	grid[1][1] = grid[1][1] - value;
 }
 void Matrix4::rotateZ(float value)
 {
-	grid[0][0] = grid[0][0] - value;
-	grid[1][0] = grid[1][0] + value;
-	grid[0][1] = grid[0][1] - value;
-	grid[1][1] = grid[1][1] - value;
+	grid[0][0] = cos(value);
+	grid[1][0] = sin(value);
+	grid[0][1] = -sin(value);
+	grid[1][1] = cos(value);
 }
 
-Matrix3 Matrix3::operator*(Matrix3 other)
+Matrix4 Matrix4::operator*(Matrix4 other)
 {
 	int h = 0;
 	float newgrid[3][3];
 	float newValue = 0;
-	Matrix3 answer;
-	for (int i = 0; i <= 2; i++)
+	Matrix4 answer;
+	for (int i = 0; i <= 3; i++)
 	{
-		for (int j = 0; j <= 2; j++)
+		for (int j = 0; j <= 3; j++)
 		{
-			for (int h = 0; h <= 2; h++)
+			for (int h = 0; h <= 3; h++)
 			{
 				newValue = newValue + (grid[i][h] * other.grid[h][j]);
 			}
@@ -58,7 +56,7 @@ Matrix3 Matrix3::operator*(Matrix3 other)
 	return answer;
 }
 
-Vector3 Matrix3::operator*(Vector3 vec)
+Vector4 Matrix4::operator*(Vector4 vec)
 {
 	float newValue = 0;
 	float vecValues[3] = { vec.getX(),vec.getY(),vec.getZ() };
@@ -73,5 +71,5 @@ Vector3 Matrix3::operator*(Vector3 vec)
 		newValue = 0;
 	}
 
-	return Vector3(answerVal[0], answerVal[1], answerVal[2]);
+	return Vector4(answerVal[0], answerVal[1], answerVal[2],answerVal[3]);
 }

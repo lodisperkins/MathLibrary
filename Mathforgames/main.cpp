@@ -1,4 +1,6 @@
 #include "Matrix3.h"
+
+
 int main()
 {
 	Matrix3 test1(1,0,0,0,1,0,0,0,1);
