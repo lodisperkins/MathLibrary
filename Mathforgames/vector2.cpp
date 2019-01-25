@@ -46,17 +46,17 @@ float Vector2::magnitude()
 	return sqrt(pow(xpos, 2) + pow(ypos, 2));
 }
 
-Vector2 Vector2::operator*(float &scalar)
+Vector2 Vector2::operator*(float scalar)
 {
 	return Vector2(xpos*scalar,ypos *scalar);
 }
 
-Vector2 Vector2::normalize()
+Vector2 Vector2::normalise()
 {
 	return Vector2(xpos/magnitude(),ypos/magnitude());
 }
 
-float Vector2::dotproduct(Vector2 & rhs)
+float Vector2::dot(Vector2 & rhs)
 {
 	return (xpos*rhs.getX()) + (ypos*rhs.getY());
 }
@@ -67,5 +67,15 @@ float Vector2::distance(Vector2& rhs)
 	return newvec.magnitude();
 }
 
+Vector2::operator float*()
+{
+	return mData;
+}
+
 
 //Distance = Vector 2 - Vector 1 then find magnitude of new vector
+
+Vector2 operator*(float scalar, Vector2 rhs)
+{
+	return Vector2(rhs.getX() * scalar, rhs.getY()*scalar);
+}

@@ -8,8 +8,7 @@ int main()
 	Vector3 test4(1, 5, 5);
 	Matrix3 test3 = test1 * test2;
 	Vector3 test5 = test3 * test4;
-	Monty gameshow;
-	gameshow.chooseCorrect(2);
-	gameshow.chooseSelect(2);
-	gameshow.
+	Vector3 newvec = test2[0];
+	
+	
 }

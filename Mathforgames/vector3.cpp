@@ -52,22 +52,22 @@ float Vector3::magnitude()
 	return sqrt(pow(xpos, 2) + pow(ypos, 2)+pow(zpos,2));
 }
 
-Vector3 Vector3::operator*(float &scalar)
+Vector3 Vector3::operator*(float scalar)
 {
 	return Vector3(xpos*scalar, ypos *scalar,zpos*scalar);
 }
 
-Vector3 Vector3::normalize()
+Vector3 Vector3::normalise()
 {
 	return Vector3(xpos / magnitude(), ypos / magnitude(),zpos/magnitude());
 }
 
-float Vector3::dotproduct(Vector3 & rhs)
+float Vector3::dot(Vector3 & rhs)
 {
 	return (xpos*rhs.getX())+(ypos*rhs.getY())+(zpos*rhs.getZ());
 }
 
-Vector3 Vector3::crossProduct(Vector3 & rhs)
+Vector3 Vector3::cross(Vector3 & rhs)
 {
 	return Vector3((ypos*rhs.getZ())-(zpos*rhs.getY()),(zpos*rhs.getX())-(xpos*rhs.getZ()),(xpos*rhs.getY())-(ypos*rhs.getX()));
 }
@@ -78,6 +78,12 @@ float Vector3::distance(Vector3& rhs)
 	return newvec.magnitude();
 }
 
+Vector3::operator float*()
+{
+	return mData;
+}
 
-//Distance = Vector 2 - Vector 1 then find magnitude of new vector
-
+Vector3 operator*(float scalar, Vector3 rhs)
+{
+	return Vector3(scalar * rhs.getX(),scalar*rhs.getY(),scalar*rhs.getZ());
+}

@@ -12,10 +12,6 @@ int Monty::chooseSelect(int choice)
 	return selection = rand() % choice;
 }
 
-int Monty::chooseOther(int num)
-{
-	
-}
 
 bool Monty::switchChoice()
 {

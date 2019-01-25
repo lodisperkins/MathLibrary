@@ -13,21 +13,21 @@ Matrix4::Matrix4(float a, float b, float c, float d, float e, float f, float g, 
 	float newgrid[4][4] = { { a,b,c,d },{ e,f,g,h },{ i,j,k,l },{m,n,o,p} };
 	memcpy(grid, newgrid, sizeof(newgrid));
 }
-void Matrix4::rotateX(float value)
+void Matrix4::setRotateX(float value)
 {
-	grid[0][0] = grid[0][0] - value;
-	grid[1][0] = grid[1][0] + value;
-	grid[0][1] = grid[0][1] - value;
-	grid[1][1] = grid[1][1] - value;
+	grid[1][1] = cos(value);
+	grid[2][1] = sin(value);
+	grid[1][2] = -sin(value);
+	grid[2][2] = cos(value);
 }
-void Matrix4::rotateY(float value)
+void Matrix4::setRotateY(float value)
 {
 	grid[0][0] = cos(value);
 	grid[2][0] = sin(value);
-	grid[0][1] = grid[0][1] - value;
-	grid[1][1] = grid[1][1] - value;
+	grid[0][2] = -sin(value);
+	grid[2][2] = cos(value);
 }
-void Matrix4::rotateZ(float value)
+void Matrix4::setRotateZ(float value)
 {
 	grid[0][0] = cos(value);
 	grid[1][0] = sin(value);
@@ -72,4 +72,46 @@ Vector4 Matrix4::operator*(Vector4 vec)
 	}
 
 	return Vector4(answerVal[0], answerVal[1], answerVal[2],answerVal[3]);
+}
+
+Vector4 Matrix4::operator[](int index)
+{
+	Vector4 result;
+	float newgrid[16];
+	for (int i = 0; i <= 15;)
+	{
+		for (int j = 0; j <= 3; j++)
+		{
+			for (int h = 0; h <= 3; h++)
+			{
+				newgrid[i] = grid[h][j];
+				i++;
+			}
+		}
+	}
+	Vector4 sum(newgrid[index * 4], 
+		newgrid[(index * 4) + 1], 
+		newgrid[(index * 4) + 2],
+		newgrid[(index*4+3)]);
+	result = sum;
+	return result;
+}
+
+Matrix4::operator float*()
+{
+	float * data;
+	float newgrid[16];
+	for (int i = 0; i <= 15;)
+	{
+		for (int j = 0; j <= 3; j++)
+		{
+			for (int h = 0; h <= 3; h++)
+			{
+				newgrid[i] = grid[h][j];
+				i++;
+			}
+
+		}
+	}
+	return data = newgrid;
 }
